@@ -33,6 +33,26 @@ If you would like to increase your quota limit,  please follow [this](https://do
 1. Once the VM is provisoned get the public up for the vm 
    ![](pub-ip-image.png)
 2. ssh into the vm
-   ```bash ssh <admin-username>@<vm-public-ip> ```
+   ```bash
+    ssh <admin-username>@<vm-public-ip> 
+    ```
 
 ## Install XRDP
+1. Install xfce desktop environment
+   ```bash 
+    sudo apt-get update
+    sudo DEBIAN_FRONTEND=noninteractive apt-get -y install xfce4
+    sudo apt install xfce4-session
+    sudo apt-get -y install xrdp
+    sudo systemctl enable xrdp
+    echo xfce4-session >~/.xsession
+    sudo service xrdp restart
+    ```
+2.  Create Network Security Group for Remote Desktop Traffic using [Azure CLI](http://shell.azure.com/)
+    ```bash 
+    az vm open-port --resource-group myResourceGroup --name myVM --port 3389
+    ```
+3. Connect your Linux VM with a Remote Desktop client
+
+    ![](xrdp-image.png)
+
